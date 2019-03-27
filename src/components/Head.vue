@@ -1,26 +1,31 @@
 <template>
-    <div>
-        <a href="/index">
+    <div id = "head">
+        <a href="/">
 			<div id="menu"> 首页 </div>
         </a>
         <div id="menu_user">
-            <div id="login"> <a href="/login">登陆</a> <a id="register" href="/register">注册</a> 
-            </div>
-            <div style="display:none" id="user_home">
-                欢迎你，<span th:value="${user.name}"></span> 
+            <div v-if="user_name!==null" id="user_home">
+                {{user_name}}
 			</div>
+            <div v-else id="login"> 
+				<a href="/login">登陆</a> <a id="register" href="/register">注册</a> 
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-
+	data:()=>{
+		return {
+			user_name : null
+		}
+	}
 }
 </script>
 
 <style scoped>
-*{
+#head{
     margin: 0;
     padding: 0;
 	z-index: 999;

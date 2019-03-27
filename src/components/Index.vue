@@ -14,6 +14,7 @@ export default {
 
 <style scoped>
 h1 {
+	padding: 300px 0 0;
 	color: rgba(255,255,255,0.6);
 	font-size: 120px;
 }

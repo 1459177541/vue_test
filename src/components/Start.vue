@@ -41,6 +41,7 @@ export default {
 	background: rgba(255,255,255,0.7);
 }
 h1 {
+	padding: 300px 0 0;
 	text-align: center;
 	margin: 50px;
 	font-size: 100px;
