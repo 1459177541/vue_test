@@ -14,6 +14,14 @@
  - [x] vuex
  - [x] vue-router
 
+ ## 开发环境
+
+> nodejs:v10.15.2
+
+> npm:6.7.0
+
+> vue:3.5.1
+
 ## 联系方式
 
 > GitHub: https://github.com/1459177541
