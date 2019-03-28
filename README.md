@@ -4,13 +4,19 @@
 
 > 望各路大神带路
 
-### 后端代码
+## 后端代码
 
 > GitHub:https://github.com/1459177541/ssh_test
 
+## 技术栈
 
-### 联系方式
-> GitHub: https://github.com/1459177541/ssh_test
+ - [x] vue
+ - [x] vuex
+ - [x] vue-router
+
+## 联系方式
+
+> GitHub: https://github.com/1459177541
 
 > email: 1459177541@qq.com
 
