@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Head/>
     <full-page ref="fullpage" :options="options" id = "fullpage">
       <Index class="section"/>
       <Start class="section"/>
@@ -13,14 +12,13 @@
 </template>
 
 <script>
-import Head from './components/Head'
-import Index from './components/Index'
-import Start from './components/Start'
+import Index from './index/IndexPage'
+import Start from './index/StartPage'
 
 export default {
   name: 'app',
   components: {
-    Head, Index, Start
+    Index, Start
   },
   data(){
     return {

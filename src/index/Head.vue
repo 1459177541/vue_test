@@ -15,12 +15,12 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
-	data:()=>{
-		return {
-			user_name : null
-		}
-	}
+	computed:mapState({
+		user_name:state=>state.user.name,
+	})
 }
 </script>
 
