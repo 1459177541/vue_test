@@ -14,9 +14,23 @@ const action = {
                 if(data.status === 'SUCCESS'){
                     this.$store.commit(USER.LOGIN, data)
                 }else{
-                    err()
+                    err(data)
                 }
             })
+    },
+    register({id, name, password, rb}){
+        user.register(
+            id,
+            name,
+            password,
+            rb
+        )
+    },
+    checkName({id, rb}){
+        return user.checkName(
+            id,
+            rb
+        )
     }
 }
 
