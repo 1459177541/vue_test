@@ -2,12 +2,12 @@
     <div>
         <h1>请选择一个开始</h1>
         <div id="login_button"> 
-            <a href="/login">
+            <router-link :to="{name:'login'}">
                 <div id="loginButton" class="button">登陆</div>
-            </a> 或 
-            <a href="/register">
+            </router-link> 或 
+            <router-link :to="{name:'register'}">
                 <div id="register" class="button">注册</div>
-            </a> 
+            </router-link> 
         </div>
     </div>
 </template>

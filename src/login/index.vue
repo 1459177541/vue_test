@@ -6,13 +6,13 @@
             <router-link 
                 class="link" 
                 :class="{check:login}"
-                to="/login">
+                :to="{ name:'login' }">
                 登录
             </router-link>
             <router-link 
                 class="link" 
                 :class="{check:register}"
-                to="/register">
+                :to="{ name:'register' }">
                 注册
             </router-link>
         </div>
@@ -27,21 +27,28 @@
 import Login from './login'
 import Register from './register'
 export default {
+    data:()=>{
+        return {
+            login:false,
+            register:false
+        }
+    },
     props:{
         page:{
-            type:String,
             default:'login'
         }
     },
     components:{
         Login, Register
     },
-    computed:{
-        login:()=>{
-            return this.page == 'login'
-        },
-        register:()=>{
-            return this.page == 'register'
+    created(){
+        this.login = this.page === 'login'
+        this.register = this.page === 'register'
+    },
+    watch:{
+        '$route' (to, from){
+            this.login = this.page === 'login'
+            this.register = this.page === 'register'            
         }
     }
 }
@@ -62,6 +69,7 @@ export default {
     margin: 50px 0 0;
     height: 80px;
     border-bottom: #64E77F 1px solid;
+    text-align: center;
 }
 .link{
     display: inline-block;
@@ -72,7 +80,7 @@ export default {
     color: black;
 }
 .check{
-    border-bottom: #64E77F 3px solid;
+    border-bottom: #64E77F 5px solid;
 }
 .login {
     top:260px;

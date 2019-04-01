@@ -11,16 +11,13 @@ export default new Router({
     routes:[
         {
             path:"/",
-            name:"index",
-            component:Index
-        },
-        {
-            path:"/index",
+            alias:'/index',
             name:"index",
             component:Index
         },
         {
             path:"/login",
+            name:"login",
             props:{
                 page: 'login'
             },
@@ -28,6 +25,7 @@ export default new Router({
         },
         {
             path:"/register",
+            name:"register",
             props:{
                 page:'register'
             },

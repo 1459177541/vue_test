@@ -1,46 +1,44 @@
 <template>
         <form id="login" class="form">
-            <div>&nbsp;&nbsp;登录id:
+            <div>
                 <input 
                     class="input" 
-                    @blur="checkId"
+                    :class="{err:idErr, success:idSuccess}"
                     type="text" 
                     placeholder="请输入用户id" 
                     v-model="id">
             </div>
-            <div>&nbsp;&nbsp;用户名:
+            <div>
                 <input 
                     class="input" 
                     :class="{err:nameErr}" 
-                    @blur="checkName"
                     type="text" 
-                    placeholder="请输入用户id" 
+                    placeholder="请输入用户名称" 
                     v-model="name">
             </div>
-            <div>&nbsp;&nbsp;&nbsp;密码:
+            <div>
                 <input 
                     class="input" 
-                    :class="{err:pwdErr}" 
-                    @blur="checkpwd"
+                    :class="{err:pwd1Err}" 
                     type="password" 
                     placeholder="请输入密码" 
                     v-model="password">
             </div>
-            <div>重复密码:
+            <div>
                 <input 
                     class="input" 
                     :class="{err:pwd2Err}" 
-                    @blur="checkpwd"
                     type="password" 
                     placeholder="请输入密码" 
                     v-model="password2">
             </div>
             <p id="error">{{this.errMsg}}</p>
-            <button @click="submit">注册</button>
+            <button class="submit" @click="submit">注册</button>
         </form>
 </template>
 
 <script>
+let lodash = require('lodash');
 export default {
     data(){
         return{
@@ -49,53 +47,58 @@ export default {
             password:"",
             password2:"",
             errMsg:"",
+            idSuccess:false,
+            idErr:false,
+            nameErr:false,
+            pwd1Err:false,
+            pwd2Err:false
         }
     },
     watch:{
-        idStatus:()=>{
-            return this.$store.dispatch('user/checkName', this.id, data=>{
-                if(data.msg === 'exist'){
-                    this.errMsg = "用户已存在";
-                    return 'err';
-                }else if(data.msg === 'non-exist'){
-                    return 'success';
-                }
-                return 'non';
-            });
+        id:(id)=>{
+            if(id == ""){
+                this.errMsg = "id不能为空";
+                this.idSuccess = false;
+                return;
+            }
+            this.debouncedCheckId()
+        },
+        name:(name)=>{
+            if(name == ""){
+                this.errMsg = "名字不能为空"
+                this.nameErr = true
+                return
+            }
+            this.nameErr = false;
+        },
+        password:(password)=>{
+            if(password == ""){
+                this.errMsg = "密码不能为空"
+                this.pwd1Err = true;
+                return
+            }  
+            this.pwd1Err = false;
+            this.checkpwd();
+        },
+        password2:(password2)=>{
+            if(password2 == ""){
+                this.errMsg = "密码不能为空"
+                this.pwd2Err = true;
+                return
+            }
+            this.pwd2Err = false
+            this.checkpwd();
         }
     },
-    computed:{
-        idStatus:()=>{
-            if(this.id == ""){
-                this.errMsg = "id不能为空";
-                return 'err';
-            }
-        },
-        nameErr:()=>{
-            if(this.name == ""){
-                this.errMsg = "名字不能为空"
-                return true;
-            }
-        },
-        pwdErr:()=>{
-            if(this.password == ""){
-                this.errMsg = "密码不能为空"
-                return true;
-            }  
-        },
-        pwd2Err:()=>{
-            if(this.password2 == ""){
-                this.errMsg = "密码不能为空"
-                return true;
-            }
-        }
+    created(){
+        this.debouncedCheckId = lodash.debounce(this.checkId, 500)
     },
     methods:{
         submit:()=>{
             this.checkId();
             this.checkName();
             this.checkpwd();
-            if(this.idErr || this.nameErr || this.pwdErr || this.pwd2Err){
+            if(this.idErr || this.nameErr || this.pwd1Err || this.pwd2Err){
                 return;
             }
             this.$store.dispatch('user/register', this.id, this.name, this.password, data=>{
@@ -105,11 +108,26 @@ export default {
         },
         checkpwd:()=>{   
             if(this.password !== this.password2){
-                this.pwdErr = true;
-                this.pwdErr = true;
+                this.pwd1Err = true;
+                this.pwd2Err = true;
                 this.errMsg = "两次密码不一致"
             }
         },
+        checkId:()=>{
+            this.$store.dispatch('user/checkName', this.id, data=>{
+                if(data.msg === 'exist'){
+                    this.errMsg = "用户已存在";
+                    this.idErr = true
+                    this.idSuccess = false
+                }else if(data.msg === 'non-exist'){
+                    this.idErr = false
+                    this.idSuccess = true
+                }else{
+                    this.idErr = false
+                    this.idSuccess = false
+                }
+            });
+        }
     }
 }
 </script>
@@ -123,7 +141,6 @@ export default {
 }
 .form div{
 	font-size: 25px;
-	display: block;
 	height: 50px;
 	margin: 30px 15px;
 }
@@ -140,8 +157,8 @@ export default {
     color: black;
     border-bottom: white 3px solid;
 	height: 35px;
-	width: 430px;
-	right: 5%;
+    width: 80%;
+    left: 10%;
 	font-size: 30px;
 }
 .form div .input:focus{

@@ -1,13 +1,13 @@
 <template>
         <form id="login" class="form">
-            <div>&nbsp;&nbsp;登录id:
+            <div>
                 <input 
                     class="input" 
                     type="text" 
                     placeholder="请输入用户id" 
                     v-model="id">
             </div>
-            <div>&nbsp;&nbsp;&nbsp;密码:
+            <div>
                 <input 
                     class="input" 
                     type="password" 
@@ -15,7 +15,7 @@
                     v-model="password">
             </div>
             <p id="error">{{errMsg}}</p>
-            <button @click="submit">登录</button>
+            <button class="submit" @click="submit">登录</button>
         </form>    
 </template>
 
@@ -42,7 +42,6 @@ export default {
 <style scoped>
 .form div{
 	font-size: 25px;
-	display: block;
 	height: 50px;
 	margin: 30px 15px;
 }
@@ -59,8 +58,8 @@ export default {
     color: black;
     border-bottom: white 3px solid;
 	height: 35px;
-	width: 430px;
-	right: 5%;
+    width: 80%;
+    left: 10%;
 	font-size: 30px;
 }
 .form div .input:focus{

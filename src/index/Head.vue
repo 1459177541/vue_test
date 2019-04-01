@@ -8,7 +8,8 @@
                 {{user_name}}
 			</div>
             <div v-else id="login"> 
-				<a href="/login">登陆</a> <a id="register" href="/register">注册</a> 
+				<router-link :to="{name:'login'}">登陆</router-link> 
+				<router-link id="register" :to="{name:'register'}">注册</router-link> 
             </div>
         </div>
     </div>
