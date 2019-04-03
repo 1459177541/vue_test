@@ -1,8 +1,8 @@
 <template>
   <div>
-    <full-page ref="fullpage" :options="options" id = "fullpage">
-      <Index class="section"/>
-      <Start class="section"/>
+    <full-page ref="fullpage" :options="options" id="fullpage">
+      <Index class="section" />
+      <Start class="section" />
     </full-page>
     <ul id="page_menu">
       <li data-menuanchor="page1" class="active"><a href="#page1">欢迎</a></li>
@@ -12,49 +12,50 @@
 </template>
 
 <script>
-import Index from './index/IndexPage'
-import Start from './index/StartPage'
+import Index from './index/IndexPage';
+import Start from './index/StartPage';
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
-    Index, Start
+    Index,
+    Start,
   },
-  data(){
+  data() {
     return {
-      options:{
-        autoScrolling:true,
-        scrollHorizontally:true,
-	      sectionsColor:['#41b883', '#ff5f45'],
-        menu:"#page_menu",
-        anchors:['page1','page2'],
-        lazyLoad:true
-      }
-    }
-  }
-}
+      options: {
+        autoScrolling: true,
+        scrollHorizontally: true,
+        sectionsColor: ['#41b883', '#ff5f45'],
+        menu: '#page_menu',
+        anchors: ['page1', 'page2'],
+        lazyLoad: true,
+      },
+    };
+  },
+};
 </script>
 
 <style scoped>
-#page_menu{
+#page_menu {
   position: fixed;
   top: 300px;
   left: 50px;
   z-index: 70;
-  background: rgba(255,255,255,0.7);
+  background: rgba(255, 255, 255, 0.7);
   border-radius: 10px;
 }
-#page_menu li{
+#page_menu li {
   padding: 5px;
   margin: 5px;
   list-style: none;
 }
-#page_menu li:hover{
+#page_menu li:hover {
   border: green 1px solid;
   border-radius: 5px;
   padding: 4px;
 }
-#page_menu li a{
+#page_menu li a {
   font-size: 45px;
   color: #555;
   text-decoration: none;
