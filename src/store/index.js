@@ -5,7 +5,7 @@ import user from './modules/user';
 
 Vue.use(Vuex);
 export default new Vuex.Store({
-  state: {},
+  strict: process.env.NODE_ENV !== 'production',
   modules: {
     user,
   },

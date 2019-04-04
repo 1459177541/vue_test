@@ -6,10 +6,11 @@ const state = {
 };
 
 const action = {
-  login({ name, password, err }) {
+  login({ commit }, { name, password, err }) {
+    alert(commit);
     user.login(name, password, data => {
       if (data.status === 'SUCCESS') {
-        this.$store.commit(USER.LOGIN, data);
+        commit(USER.LOGIN, data);
       } else {
         err(data);
       }

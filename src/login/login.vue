@@ -17,7 +17,7 @@
       />
     </div>
     <p id="error">{{ errMsg }}</p>
-    <button class="submit" @click="submit">登录</button>
+    <button class="submit" @click="submit()">登录</button>
   </form>
 </template>
 
@@ -31,11 +31,17 @@ export default {
     };
   },
   methods: {
-    submit: () => {
-      this.$store.dispatch('user/login', this.id, this.password, data => {
-        this.errMsg = data.msg;
+    submit() {
+      this.$store.dispatch('user/login', {
+        id: this.id,
+        password: this.password,
+        err: data => {
+          this.errMsg = data.msg;
+        },
       });
-      this.$router.push('/');
+      if (this.errMsg === '') {
+        this.$router.push('/');
+      }
     },
   },
 };
